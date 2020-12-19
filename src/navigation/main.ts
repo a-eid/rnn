@@ -1,8 +1,18 @@
 import {Navigation} from 'react-native-navigation';
-import {rootRoutes} from './root-stack/const';
-import {rootStack} from './root-stack/root-stack';
+import {About, Home, Login} from '../screens';
+import {rootRoutes} from './const';
 
 Navigation.setDefaultOptions({
+  animations: {
+    setRoot: {
+      alpha: {
+        from: 0,
+        to: 1,
+        duration: 300,
+        interpolation: {type: 'accelerate'},
+      },
+    },
+  },
   statusBar: {
     backgroundColor: '#4d089a',
   },
@@ -10,22 +20,78 @@ Navigation.setDefaultOptions({
     title: {
       color: 'white',
     },
-    backButton: {
+    largeTitle: {
       color: 'white',
+    },
+    backButton: {
+      color: 'black',
     },
     background: {
       color: '#4d089a',
     },
   },
+  bottomTabs: {
+    backgroundColor: '#dce',
+  },
+  bottomTab: {textColor: 'white', selectedTextColor: 'blue'},
 });
 
-Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      // stack: rootStack,
-      bottomTabs: {
-        children: [{stack: rootStack}, {stack: rootStack}],
+Navigation.registerComponent(rootRoutes.home, () => Home);
+Navigation.registerComponent(rootRoutes.about, () => About);
+Navigation.registerComponent(rootRoutes.login, () => Login);
+const AppRoot = {
+  root: {
+    bottomTabs: {
+      options: {
+        bottomTab: {textColor: 'white'},
       },
+      children: [
+        {
+          stack: {
+            children: [
+              {
+                component: {
+                  name: rootRoutes.home,
+                },
+              },
+            ],
+          },
+        },
+        {
+          stack: {
+            children: [
+              {
+                component: {
+                  name: rootRoutes.about,
+                },
+              },
+            ],
+          },
+        },
+      ],
     },
-  });
+  },
+};
+const LoginRoot = {
+  root: {
+    stack: {
+      children: [
+        {
+          component: {name: rootRoutes.login},
+        },
+      ],
+    },
+  },
+};
+
+Navigation.events().registerAppLaunchedListener(async () => {
+  Navigation.setRoot(AppRoot);
 });
+
+export function loginSuccess() {
+  Navigation.setRoot(AppRoot);
+}
+
+export function logOUt() {
+  Navigation.setRoot(LoginRoot);
+}

@@ -1,4 +1,4 @@
-import {Navigation} from 'react-native-navigation';
+import {LayoutRoot, Navigation} from 'react-native-navigation';
 import {About, Home, Login} from '../screens';
 import {rootRoutes} from './const';
 
@@ -34,12 +34,13 @@ Navigation.setDefaultOptions({
     backgroundColor: '#dce',
   },
   bottomTab: {textColor: 'white', selectedTextColor: 'blue'},
+  overlay: {},
 });
 
 Navigation.registerComponent(rootRoutes.home, () => Home);
 Navigation.registerComponent(rootRoutes.about, () => About);
 Navigation.registerComponent(rootRoutes.login, () => Login);
-const AppRoot = {
+const AppRoot: LayoutRoot = {
   root: {
     bottomTabs: {
       options: {
@@ -72,7 +73,7 @@ const AppRoot = {
     },
   },
 };
-const LoginRoot = {
+const LoginRoot: LayoutRoot = {
   root: {
     stack: {
       children: [

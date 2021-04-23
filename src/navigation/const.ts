@@ -4,4 +4,5 @@ export const rootRoutes = {
   home: 'root.home',
   about: 'root.about',
   login: 'root.login',
+  overlay: 'root.overlay[',
 };

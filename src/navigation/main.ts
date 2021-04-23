@@ -1,5 +1,6 @@
 import {LayoutRoot, Navigation} from 'react-native-navigation';
 import {About, Home, Login} from '../screens';
+import {Overlay} from '../screens/Overlay';
 import {rootRoutes} from './const';
 
 Navigation.setDefaultOptions({
@@ -40,6 +41,8 @@ Navigation.setDefaultOptions({
 Navigation.registerComponent(rootRoutes.home, () => Home);
 Navigation.registerComponent(rootRoutes.about, () => About);
 Navigation.registerComponent(rootRoutes.login, () => Login);
+Navigation.registerComponent(rootRoutes.overlay, () => Overlay);
+
 const AppRoot: LayoutRoot = {
   root: {
     bottomTabs: {

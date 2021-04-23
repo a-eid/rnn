@@ -77,42 +77,35 @@ export function Home({componentId, count}: NavigationComponentProps & {count: nu
     // });
   }
 
+  function showOverlay() {
+    Navigation.showOverlay({
+      component: {
+        name: rootRoutes.overlay,
+      },
+    });
+  }
+
   return (
     <ScrollView
+      style={{flex: 1, backgroundColor: 'green'}}
       contentInsetAdjustmentBehavior="automatic"
-      style={{backgroundColor: 'white'}}
       keyboardDismissMode="interactive">
-      <SafeAreaView style={{marginTop: 90}}>
-        <TouchableOpacity onPress={handlePress}>
-          <Text>Push</Text>
-        </TouchableOpacity>
-        <View style={{backgroundColor: 'white', height: 500}} />
-        <Text style={{fontSize: 24, padding: 20, color: 'black'}}>{count}</Text>
-        {/* <View style={{backgroundColor: 'white', height: 500}} /> */}
-      </SafeAreaView>
+      <TouchableOpacity onPress={showOverlay} style={{padding: 20}}>
+        <Text style={{color: 'blue'}}>ShowOverlay</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={{flex: 1, backgroundColor: 'red'}}></TouchableOpacity>
     </ScrollView>
   );
 }
 
 (Home as LayoutComponent).options = {
   topBar: {
-    rightButtons: [
-      {
-        id: 'add',
-        systemItem: 'add',
-      },
-      {
-        id: 'add',
-        systemItem: 'add',
-      },
-    ],
     title: {text: 'Home'},
     subtitle: {text: 'home', color: 'red'},
     largeTitle: {visible: true},
     // hideOnScroll: true,
     animate: true,
     borderColor: 'red',
-    drawBehind: true,
     // translucent: true,
     // barStyle: 'black',
     searchBar: {
